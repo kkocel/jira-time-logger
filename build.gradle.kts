@@ -10,6 +10,8 @@ plugins {
     kotlin("jvm") version "1.7.0"
     kotlin("plugin.spring") version "1.7.0"
     id("com.google.osdetector") version "1.7.0"
+    id("org.jmailen.kotlinter") version "3.11.1"
+    id("io.gitlab.arturbosch.detekt").version("1.21.0")
 }
 
 group = "tech.kocel"
