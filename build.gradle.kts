@@ -7,7 +7,7 @@ val wireMockVersion = "2.33.2"
 plugins {
     id("org.springframework.boot") version "2.7.2"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.7.0"
+    kotlin("jvm") version "1.7.10"
     kotlin("plugin.spring") version "1.7.0"
     id("com.google.osdetector") version "1.7.0"
     id("org.jmailen.kotlinter") version "3.11.1"
