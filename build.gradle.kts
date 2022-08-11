@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinLoggingVersion = "2.1.23"
-val kotlinTestVersion = "5.4.1"
+val kotlinTestVersion = "5.4.2"
 val wireMockVersion = "2.33.2"
 
 plugins {
