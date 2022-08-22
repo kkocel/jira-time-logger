@@ -28,6 +28,20 @@ Automate your time logging by utilizing Git hooks and Jira API.
       D-->E["Log time for that issues"]
 ```
 
+### Building & Running
+
+Building:
+
+```
+./gradlew build
+```
+
+To run this script you need to pass your Jira instance address, user, and password:
+
+```
+./gradlew bootRun --args='--jira.host=https://jira.instance.com --jira.user=yourusername --jira.password=your-password'
+```
+
 ### Tips & tricks
 
 #### Configure Git Template

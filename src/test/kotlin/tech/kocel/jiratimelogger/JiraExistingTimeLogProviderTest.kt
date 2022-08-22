@@ -56,7 +56,7 @@ class JiraExistingTimeLogProviderTest
                                 "self": "https://jira.com/rest/api/2/user?username=kocelkr",
                                 "name": "kocelkr",
                                 "key": "kocelkr",
-                                "emailAddress": "Krzysztof.Kocel@vimn.com",
+                                "emailAddress": "Krzysztof.Kocel@gmail.com",
                                 "avatarUrls":
                                 {
                                     "48x48": "https://jira.com/secure/useravatar?",
@@ -73,7 +73,7 @@ class JiraExistingTimeLogProviderTest
                                 "self": "https://jira.com/rest/api/2/user?username=kocelkr",
                                 "name": "kocelkr",
                                 "key": "kocelkr",
-                                "emailAddress": "Krzysztof.Kocel@vimn.com",
+                                "emailAddress": "Krzysztof.Kocel@gmail.com",
                                 "avatarUrls":
                                 {
                                     "48x48": "https://jira.com/secure/useravatar?",
@@ -152,7 +152,7 @@ class JiraExistingTimeLogProviderTest
                                 "self": "https://jira.com/rest/api/2/user?username=kocelkr",
                                 "name": "kocelkr",
                                 "key": "kocelkr",
-                                "emailAddress": "Krzysztof.Kocel@vimn.com",
+                                "emailAddress": "Krzysztof.Kocel@gmail.com",
                                 "avatarUrls":
                                 {
                                     "48x48": "https://jira.com/secure/useravatar?",
@@ -169,7 +169,7 @@ class JiraExistingTimeLogProviderTest
                                 "self": "https://jira.com/rest/api/2/user?username=kocelkr",
                                 "name": "kocelkr",
                                 "key": "kocelkr",
-                                "emailAddress": "Krzysztof.Kocel@vimn.com",
+                                "emailAddress": "Krzysztof.Kocel@gmail.com",
                                 "avatarUrls":
                                 {
                                     "48x48": "https://jira.com/secure/useravatar?",
@@ -196,7 +196,7 @@ class JiraExistingTimeLogProviderTest
                                 "self": "https://jira.com/rest/api/2/user?username=kocelkr",
                                 "name": "kocelkr",
                                 "key": "kocelkr",
-                                "emailAddress": "Krzysztof.Kocel@vimn.com",
+                                "emailAddress": "Krzysztof.Kocel@gmail.com",
                                 "avatarUrls":
                                 {
                                     "48x48": "https://jira.com/secure/useravatar?",
@@ -213,7 +213,7 @@ class JiraExistingTimeLogProviderTest
                                 "self": "https://jira.com/rest/api/2/user?username=kocelkr",
                                 "name": "kocelkr",
                                 "key": "kocelkr",
-                                "emailAddress": "Krzysztof.Kocel@vimn.com",
+                                "emailAddress": "Krzysztof.Kocel@gmail.com",
                                 "avatarUrls":
                                 {
                                     "48x48": "https://jira.com/secure/useravatar?",
@@ -258,7 +258,7 @@ class JiraExistingTimeLogProviderTest
                                 "self": "https://jira.com/rest/api/2/user?username=kocelkr",
                                 "name": "kocelkr",
                                 "key": "kocelkr",
-                                "emailAddress": "Krzysztof.Kocel@vimn.com",
+                                "emailAddress": "Krzysztof.Kocel@gmail.com",
                                 "avatarUrls":
                                 {
                                     "48x48": "https://jira.com/secure/useravatar?",
@@ -275,7 +275,7 @@ class JiraExistingTimeLogProviderTest
                                 "self": "https://jira.com/rest/api/2/user?username=kocelkr",
                                 "name": "kocelkr",
                                 "key": "kocelkr",
-                                "emailAddress": "Krzysztof.Kocel@vimn.com",
+                                "emailAddress": "Krzysztof.Kocel@gmail.com",
                                 "avatarUrls":
                                 {
                                     "48x48": "https://jira.com/secure/useravatar?",
