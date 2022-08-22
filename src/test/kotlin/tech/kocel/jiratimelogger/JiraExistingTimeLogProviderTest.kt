@@ -14,7 +14,7 @@ import java.time.ZoneOffset
 
 @SpringBootTest
 @Suppress("LongMethod")
-class WebclientExistingTimeLogProviderTest
+class JiraExistingTimeLogProviderTest
 (@Autowired private val webclientBuilder: WebClient.Builder) {
 
     @Test
@@ -103,7 +103,7 @@ class WebclientExistingTimeLogProviderTest
                         )
                 )
         )
-        WebclientExistingTimeLogProvider(
+        JiraExistingTimeLogProvider(
             baseUrl = wireMockServer.baseUrl(),
             user = "foo",
             password = "bar",
@@ -305,7 +305,7 @@ class WebclientExistingTimeLogProviderTest
                         )
                 )
         )
-        WebclientExistingTimeLogProvider(
+        JiraExistingTimeLogProvider(
             baseUrl = wireMockServer.baseUrl(),
             user = "foo",
             password = "bar",

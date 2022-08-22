@@ -1,5 +1,6 @@
 package tech.kocel.jiratimelogger
 
+import mu.KotlinLogging
 import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
@@ -7,21 +8,22 @@ import java.time.Duration
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-class WebclientExistingTimeLogProvider(
+class JiraExistingTimeLogProvider(
     baseUrl: String,
     user: String,
     password: String,
     webClientBuilder: WebClient.Builder
 ) : ExistingTimeLogProvider {
+    private val logger = KotlinLogging.logger {}
 
     private val jiraDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
     private val webclient =
         webClient(
             webClientBuilder = webClientBuilder,
-            verboseLogging = true,
+            verboseLogging = false,
             baseUrl = baseUrl,
-            connectionProviderName = "jira-work-logger",
+            connectionProviderName = "jira-existing-time-provider",
             pendingMaxCount = PENDING_ACQUISITION_MAX_COUNT,
             user = user,
             password = password
@@ -34,13 +36,10 @@ class WebclientExistingTimeLogProvider(
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(
-                """
-                    {
-                    "jql": "worklogAuthor = currentUser() 
-                    AND worklogDate = ${day.format(jiraDateFormat)} ORDER BY updated ASC",
-                    "fields": ["worklog"]
-                    }
-                """.trimIndent()
+                JqlSearch(
+                    jql = "worklogAuthor = currentUser() AND worklogDate = ${day.format(jiraDateFormat)} ORDER BY updated ASC",
+                    fields = listOf("worklog")
+                )
             ).retrieve()
             .bodyToMono<SearchContainer>()
             .map { searchContainer ->
@@ -57,6 +56,9 @@ class WebclientExistingTimeLogProvider(
                         .toLong()
                 )
             }
+            .doOnError {
+                logger.info { it }
+            }
             .block() ?: Duration.ZERO
     }
 
@@ -70,6 +72,8 @@ class WebclientExistingTimeLogProvider(
         val total: Int,
         val issues: List<IssueWorklogSearchResult>
     )
+
+    data class JqlSearch(val jql: String, val fields: List<String>)
 
     data class IssueWorklogSearchResult(val key: String, val fields: IssueWorklogSearchResultFields)
 

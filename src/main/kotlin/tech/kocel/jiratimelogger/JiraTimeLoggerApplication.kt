@@ -25,13 +25,20 @@ class BeansInitializer : ApplicationContextInitializer<GenericApplicationContext
     override fun initialize(applicationContext: GenericApplicationContext) {
         beans {
             bean<LogTimeSpringRunner>()
-            bean<InMemoryExistingTimeLogProvider>()
             bean<IssueFileLogCrawler>()
             bean<EqualIssueTimePartitioner>()
             bean<StringIssuesPerDayProvider>()
             bean<LoggingOrchestrator>()
             bean {
                 JiraWorkLogger(
+                    baseUrl = env.getRequiredProperty("jira.host"),
+                    user = env.getRequiredProperty("jira.user"),
+                    password = env.getRequiredProperty("jira.password"),
+                    webClientBuilder = ref()
+                )
+            }
+            bean {
+                JiraExistingTimeLogProvider(
                     baseUrl = env.getRequiredProperty("jira.host"),
                     user = env.getRequiredProperty("jira.user"),
                     password = env.getRequiredProperty("jira.password"),

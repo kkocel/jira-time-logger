@@ -20,7 +20,7 @@ class JiraWorkLogger(
     private val webclient =
         webClient(
             webClientBuilder = webClientBuilder,
-            verboseLogging = true,
+            verboseLogging = false,
             baseUrl = baseUrl,
             connectionProviderName = "jira-work-logger",
             pendingMaxCount = PENDING_ACQUISITION_MAX_COUNT,

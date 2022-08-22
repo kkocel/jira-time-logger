@@ -1,6 +1,7 @@
 package tech.kocel.jiratimelogger
 
 import mu.KotlinLogging
+import java.time.Duration
 
 class LoggingOrchestrator(
     private val issueFileLogCrawler: IssueFileLogCrawler,
@@ -16,11 +17,22 @@ class LoggingOrchestrator(
 
         daysWithIssues.map(issueTimePartitioner::howLongEachIssueTook)
             .forEach { dayWithLoggedIssues ->
-                dayWithLoggedIssues.forEach { workLogger.logWork(it.day, it.issue, it.loggedTime) }
+                dayWithLoggedIssues
+                    .filter {
+                        if (it.loggedTime > Duration.ZERO) {
+                            true
+                        } else {
+                            logger.info { "Not logging work ${it.day.toLocalDate()} - already logged" }
+                            false
+                        }
+                    }
+                    .forEach { workLogger.logWork(it.day, it.issue, it.loggedTime) }
             }
 
         if (daysWithIssues.isNotEmpty()) {
-            issueFileLogCrawler.saveFinishDay(daysWithIssues.last().day.toLocalDate())
+            val date = daysWithIssues.last().day.toLocalDate()
+            issueFileLogCrawler.saveFinishDay(date)
+            logger.info { "Finished logging at $date" }
         } else {
             logger.info { "No days to log" }
         }

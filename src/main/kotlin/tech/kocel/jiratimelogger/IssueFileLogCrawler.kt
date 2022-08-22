@@ -25,7 +25,7 @@ class IssueFileLogCrawler(
     }
 
     private fun readFinishDay(): LocalDate {
-        return LocalDate.parse(File(finishDayMarkerFileName).readText(), DateTimeFormatter.ISO_LOCAL_DATE)
+        return LocalDate.parse(File(finishDayMarkerFileName).readText().trim(), DateTimeFormatter.ISO_LOCAL_DATE)
     }
 
     fun saveFinishDay(date: LocalDate) {
