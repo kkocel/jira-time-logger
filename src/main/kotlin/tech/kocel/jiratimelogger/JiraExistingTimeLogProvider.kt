@@ -37,7 +37,8 @@ class JiraExistingTimeLogProvider(
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(
                 JqlSearch(
-                    jql = "worklogAuthor = currentUser() AND worklogDate = ${day.format(jiraDateFormat)} ORDER BY updated ASC",
+                    jql = "worklogAuthor = currentUser() AND worklogDate = ${day.format(jiraDateFormat)} " +
+                        "ORDER BY updated ASC",
                     fields = listOf("worklog")
                 )
             ).retrieve()
