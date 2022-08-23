@@ -14,7 +14,7 @@ class JiraWorkLogger(
     user: String,
     password: String,
     webClientBuilder: WebClient.Builder
-) : WorkLogger {
+) {
     private val logger = KotlinLogging.logger {}
 
     private val webclient =
@@ -30,7 +30,7 @@ class JiraWorkLogger(
 
     private val jiraDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 
-    override fun logWork(day: OffsetDateTime, issue: String, duration: Duration) {
+    fun logWork(day: OffsetDateTime, issue: String, duration: Duration) {
         webclient
             .post()
             .uri("/rest/api/2/issue/{issue}/worklog", issue)

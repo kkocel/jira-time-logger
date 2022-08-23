@@ -7,6 +7,7 @@ import org.springframework.boot.runApplication
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.support.GenericApplicationContext
 import org.springframework.context.support.beans
+import java.time.Clock
 
 @SpringBootApplication
 class JiraTimeLoggerApplication
@@ -24,10 +25,12 @@ class BeansInitializer : ApplicationContextInitializer<GenericApplicationContext
     @Suppress("LongMethod")
     override fun initialize(applicationContext: GenericApplicationContext) {
         beans {
+            bean {
+                Clock.systemUTC()
+            }
             bean<LogTimeSpringRunner>()
-            bean<IssueFileLogCrawler>()
+            bean<RemainingCommitsReader>()
             bean<EqualIssueTimePartitioner>()
-            bean<StringIssuesPerDayProvider>()
             bean<LoggingOrchestrator>()
             bean {
                 JiraWorkLogger(

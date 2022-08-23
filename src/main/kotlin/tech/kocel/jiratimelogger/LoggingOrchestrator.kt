@@ -1,19 +1,20 @@
 package tech.kocel.jiratimelogger
 
 import mu.KotlinLogging
+import java.time.Clock
 import java.time.Duration
+import java.time.LocalDate
 
 class LoggingOrchestrator(
-    private val issueFileLogCrawler: IssueFileLogCrawler,
-    private val issuesPerDayProvider: IssuesPerDayProvider,
+    private val remainingCommitsReader: RemainingCommitsReader,
     private val issueTimePartitioner: EqualIssueTimePartitioner,
-    private val workLogger: WorkLogger
+    private val workLogger: JiraWorkLogger,
+    private val clock: Clock
 ) {
     private val logger = KotlinLogging.logger {}
 
     fun logTimeOnIssues() {
-        val daysWithIssues: List<DayWithIssues> =
-            issuesPerDayProvider.provideDaysWithIssues(issueFileLogCrawler.readFile())
+        val daysWithIssues: List<DayWithIssues> = remainingCommitsReader.provideRemainingDaysWithIssues()
 
         daysWithIssues.map(issueTimePartitioner::howLongEachIssueTook)
             .forEach { dayWithLoggedIssues ->
@@ -31,9 +32,10 @@ class LoggingOrchestrator(
 
         if (daysWithIssues.isNotEmpty()) {
             val date = daysWithIssues.last().day.toLocalDate()
-            issueFileLogCrawler.saveFinishDay(date)
+            remainingCommitsReader.saveFinishDay(date)
             logger.info { "Finished logging at $date" }
         } else {
+            remainingCommitsReader.saveFinishDay(LocalDate.now(clock))
             logger.info { "No days to log" }
         }
     }
