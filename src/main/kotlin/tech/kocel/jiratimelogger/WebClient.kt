@@ -33,7 +33,6 @@ fun webClient(
                 .maxConnections(ConnectionProvider.DEFAULT_POOL_MAX_CONNECTIONS)
                 .pendingAcquireMaxCount(pendingMaxCount)
                 .pendingAcquireTimeout(Duration.ofMillis(pendingAcquireTimeout))
-                // .metrics(true)
                 .build()
         ).followRedirect(true).apply {
             if (verboseLogging) {
