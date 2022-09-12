@@ -7,7 +7,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
     kotlin("jvm") version "1.7.10"
     kotlin("plugin.spring") version "1.7.10"
-    id("com.google.osdetector") version "1.7.0"
+    id("com.google.osdetector") version "1.7.1"
     id("org.jmailen.kotlinter") version "3.12.0"
     id("io.gitlab.arturbosch.detekt").version("1.21.0")
 }
