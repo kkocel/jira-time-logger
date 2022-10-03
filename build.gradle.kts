@@ -1,5 +1,5 @@
 val kotlinLoggingVersion = "3.0.0"
-val kotlinTestVersion = "5.4.2"
+val kotlinTestVersion = "5.5.0"
 val wireMockVersion = "2.34.0"
 
 plugins {
