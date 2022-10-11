@@ -1,5 +1,6 @@
 package tech.kocel.jiratimelogger
 
+import arrow.core.Either
 import mu.KotlinLogging
 import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.client.WebClient
@@ -30,7 +31,7 @@ class JiraWorkLogger(
 
     private val jiraDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 
-    fun logWork(day: OffsetDateTime, issue: String, duration: Duration) {
+    fun logWork(day: OffsetDateTime, issue: String, duration: Duration): Either<Throwable, String?> = Either.catch {
         webclient
             .post()
             .uri("/rest/api/2/issue/{issue}/worklog", issue)
@@ -45,13 +46,15 @@ class JiraWorkLogger(
             .bodyToMono<String>()
             .map {
                 logger.info { "Logged for $day" }
+                it
             }
             .doOnError {
                 if (it is WebClientResponseException) {
                     logger.warn { "Error for $day and $issue: " + it.responseBodyAsString }
+                } else {
+                    logger.warn { "Can't log worklog: $it" }
                 }
             }
-            .onErrorMap { it }
             .block()
     }
 

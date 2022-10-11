@@ -3,7 +3,9 @@ package tech.kocel.jiratimelogger
 import mu.KotlinLogging
 import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.reactive.function.client.WebClientResponseException
 import org.springframework.web.reactive.function.client.bodyToMono
+import reactor.core.publisher.Mono
 import java.time.Duration
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -58,8 +60,15 @@ class JiraExistingTimeLogProvider(
                 )
             }
             .doOnError {
-                logger.info { it }
+                if (it is WebClientResponseException) {
+                    logger.warn { "Can't search for issues at $day body: " + it.responseBodyAsString }
+                } else {
+                    logger.info { it }
+                }
             }
+            .onErrorResume(
+                WebClientResponseException::class.java
+            ) { Mono.just(Duration.ZERO) }
             .block() ?: Duration.ZERO
     }
 

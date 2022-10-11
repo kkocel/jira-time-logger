@@ -1,3 +1,4 @@
+val arrowVersion = "1.1.2"
 val kotlinLoggingVersion = "2.1.23"
 val kotlinTestVersion = "5.4.2"
 val wireMockVersion = "2.33.2"
@@ -5,8 +6,9 @@ val wireMockVersion = "2.33.2"
 plugins {
     id("org.springframework.boot") version "2.7.3"
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
-    kotlin("jvm") version "1.7.10"
-    kotlin("plugin.spring") version "1.7.10"
+    val kotlinVersion = "1.7.20"
+    kotlin("jvm") version kotlinVersion
+    kotlin("plugin.spring") version kotlinVersion
     id("com.google.osdetector") version "1.7.0"
     id("org.jmailen.kotlinter") version "3.11.1"
     id("io.gitlab.arturbosch.detekt").version("1.21.0")
@@ -33,6 +35,7 @@ dependencies {
     }
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("io.arrow-kt:arrow-core:$arrowVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
