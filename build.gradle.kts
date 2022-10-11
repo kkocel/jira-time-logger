@@ -1,16 +1,16 @@
 val arrowVersion = "1.1.2"
-val kotlinLoggingVersion = "2.1.23"
-val kotlinTestVersion = "5.4.2"
-val wireMockVersion = "2.33.2"
+val kotlinLoggingVersion = "3.0.0"
+val kotlinTestVersion = "5.5.1"
+val wireMockVersion = "2.34.0"
 
 plugins {
-    id("org.springframework.boot") version "2.7.3"
-    id("io.spring.dependency-management") version "1.0.13.RELEASE"
+    id("org.springframework.boot") version "2.7.4"
+    id("io.spring.dependency-management") version "1.0.14.RELEASE"
     val kotlinVersion = "1.7.20"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("com.google.osdetector") version "1.7.0"
-    id("org.jmailen.kotlinter") version "3.11.1"
+    id("com.google.osdetector") version "1.7.1"
+    id("org.jmailen.kotlinter") version "3.12.0"
     id("io.gitlab.arturbosch.detekt").version("1.21.0")
 }
 
