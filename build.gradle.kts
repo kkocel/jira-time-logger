@@ -1,6 +1,6 @@
 val arrowVersion = "1.1.3"
 val kotlinLoggingVersion = "3.0.2"
-val kotlinTestVersion = "5.5.1"
+val kotlinTestVersion = "5.5.2"
 val wireMockVersion = "2.34.0"
 
 plugins {
