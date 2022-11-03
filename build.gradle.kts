@@ -1,7 +1,7 @@
 val arrowVersion = "1.1.3"
 val kotlinLoggingVersion = "3.0.4"
 val kotlinTestVersion = "5.5.3"
-val wireMockVersion = "2.34.0"
+val wireMockVersion = "2.35.0"
 
 plugins {
     id("org.springframework.boot") version "2.7.5"
