@@ -45,7 +45,7 @@ class JiraWorkLogger(
             ).retrieve()
             .bodyToMono<String>()
             .map {
-                logger.info { "Logged for $day" }
+                logger.info { "Logged $duration for $day" }
                 it
             }
             .doOnError {

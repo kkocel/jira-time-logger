@@ -4,7 +4,7 @@ val kotlinTestVersion = "5.5.4"
 val wireMockVersion = "2.35.0"
 
 plugins {
-    id("org.springframework.boot") version "2.7.5"
+    id("org.springframework.boot") version "3.0.0"
     id("io.spring.dependency-management") version "1.1.0"
     val kotlinVersion = "1.7.21"
     kotlin("jvm") version kotlinVersion
@@ -39,7 +39,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("com.github.tomakehurst:wiremock-jre8:$wireMockVersion")
+    testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:$wireMockVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:$kotlinTestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotlinTestVersion")
