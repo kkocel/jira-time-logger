@@ -1,4 +1,4 @@
-val arrowVersion = "1.1.3"
+val arrowVersion = "1.1.5"
 val kotlinLoggingVersion = "3.0.4"
 val kotlinTestVersion = "5.5.4"
 val wireMockVersion = "2.35.0"
