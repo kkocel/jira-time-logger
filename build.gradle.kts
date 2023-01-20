@@ -9,7 +9,7 @@ plugins {
     val kotlinVersion = "1.8.0"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("com.google.osdetector") version "1.7.1"
+    id("com.google.osdetector") version "1.7.2"
     id("org.jmailen.kotlinter") version "3.13.0"
     id("io.gitlab.arturbosch.detekt").version("1.21.0")
 }
