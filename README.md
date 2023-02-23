@@ -36,10 +36,10 @@ Building:
 ./gradlew build
 ```
 
-To run this script you need to pass your Jira instance address, user, and password:
+To run this script you need to pass your Jira instance address, user, and password or token:
 
 ```
-./gradlew bootRun --args='--jira.host=https://jira.instance.com --jira.user=yourusername --jira.password=your-password'
+./gradlew bootRun --args='--jira.host=https://jira.instance.com --jira.user=yourusername --jira.password=your-password/token'
 ```
 
 ### Tips & tricks
