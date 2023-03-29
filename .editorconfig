@@ -1,0 +1,7 @@
+root = true
+
+[*.{kt,kts,kt.spec,kts.spec}]
+ktlint_standard_final-newline = disabled
+ktlint_standard_import-ordering = disabled
+ktlint_standard_trailing-comma-on-declaration-site = disabled
+ktlint_standard_trailing-comma-on-call-site = disabled

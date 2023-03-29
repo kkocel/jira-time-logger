@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.BIN
+
 val arrowVersion = "1.1.5"
 val kotlinLoggingVersion = "3.0.5"
 val kotlinTestVersion = "5.5.5"
@@ -10,7 +12,7 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
     id("com.google.osdetector") version "1.7.3"
-    id("org.jmailen.kotlinter") version "3.13.0"
+    id("org.jmailen.kotlinter") version "3.14.0"
     id("io.gitlab.arturbosch.detekt").version("1.21.0")
 }
 
@@ -54,4 +56,9 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.wrapper {
+    gradleVersion = "8.0.2"
+    distributionType = BIN
 }
