@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.BIN
+
 val arrowVersion = "1.1.5"
 val kotlinLoggingVersion = "3.0.5"
 val kotlinTestVersion = "5.5.5"
@@ -54,4 +56,9 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.wrapper {
+    gradleVersion = "8.0.2"
+    distributionType = BIN
 }
