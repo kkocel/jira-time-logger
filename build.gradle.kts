@@ -2,7 +2,7 @@ import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.BIN
 
 val arrowVersion = "1.1.5"
 val kotlinLoggingVersion = "3.0.5"
-val kotlinTestVersion = "5.6.0"
+val kotlinTestVersion = "5.6.1"
 val wireMockVersion = "2.35.0"
 
 plugins {
