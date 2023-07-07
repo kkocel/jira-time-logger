@@ -13,11 +13,19 @@ plugins {
     kotlin("plugin.spring") version kotlinVersion
     id("com.google.osdetector") version "1.7.3"
     id("org.jmailen.kotlinter") version "3.15.0"
-    id("io.gitlab.arturbosch.detekt").version("1.21.0")
+    id("io.gitlab.arturbosch.detekt").version("1.23.0")
 }
 
 group = "tech.kocel"
 version = "0.0.1-SNAPSHOT"
+
+project.afterEvaluate {
+    configurations["detekt"].resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin") {
+            useVersion("1.8.21")
+        }
+    }
+}
 
 kotlin {
     jvmToolchain {
@@ -59,6 +67,6 @@ tasks.withType<Test> {
 }
 
 tasks.wrapper {
-    gradleVersion = "8.0.2"
+    gradleVersion = "8.1.1"
     distributionType = BIN
 }
