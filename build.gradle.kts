@@ -12,7 +12,7 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
     id("com.google.osdetector") version "1.7.3"
-    id("org.jmailen.kotlinter") version "3.15.0"
+    id("org.jmailen.kotlinter") version "3.16.0"
     id("io.gitlab.arturbosch.detekt").version("1.23.0")
 }
 
