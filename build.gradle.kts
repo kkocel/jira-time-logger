@@ -3,7 +3,7 @@ import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.BIN
 val arrowVersion = "1.2.0"
 val kotlinLoggingVersion = "3.0.5"
 val kotlinTestVersion = "5.6.2"
-val wireMockVersion = "2.35.0"
+val wireMockVersion = "3.0.1"
 
 plugins {
     id("org.springframework.boot") version "3.1.3"
