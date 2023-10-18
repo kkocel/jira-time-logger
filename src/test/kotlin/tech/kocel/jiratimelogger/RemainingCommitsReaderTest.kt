@@ -27,38 +27,46 @@ class RemainingCommitsReaderTest {
             2022-06-23 15:11:03 [some-project:feature/new-events] FOO-1550 FOO-1550 New events  
         """
 
-        val commitLogFilePath = createTempFile().apply {
-            writeText(input)
-        }
+        val commitLogFilePath =
+            createTempFile().apply {
+                writeText(input)
+            }
 
-        val output = RemainingCommitsReader(
-            clock = Clock.fixed(Instant.parse("2022-05-25T16:45:42.00Z"), UTC),
-            logfileName = commitLogFilePath.absolutePathString(),
-            finishDayMarkerFileName = createTempFile().absolutePathString()
+        val output =
+            RemainingCommitsReader(
+                clock = Clock.fixed(Instant.parse("2022-05-25T16:45:42.00Z"), UTC),
+                logfileName = commitLogFilePath.absolutePathString(),
+                finishDayMarkerFileName = createTempFile().absolutePathString()
+            ).provideRemainingDaysWithIssues()
 
-        ).provideRemainingDaysWithIssues()
-
-        output shouldContainExactly listOf(
-            DayWithIssues(
-                day = dateTime(2022, 5, 27, 11, 14, 11),
-                issues = listOf("FOO-666", "FOO-1548")
-            ),
-            DayWithIssues(
-                day = dateTime(2022, 6, 21, 14, 10, 45),
-                issues = listOf("FOO-1597", "FOO-1600")
-            ),
-            DayWithIssues(
-                day = dateTime(2022, 6, 22, 15, 33, 25),
-                issues = listOf("FOO-1598")
-            ),
-            DayWithIssues(
-                day = dateTime(2022, 6, 23, 13, 25, 52),
-                issues = listOf("FOO-1550", "FOO-1550")
+        output shouldContainExactly
+            listOf(
+                DayWithIssues(
+                    day = dateTime(2022, 5, 27, 11, 14, 11),
+                    issues = listOf("FOO-666", "FOO-1548")
+                ),
+                DayWithIssues(
+                    day = dateTime(2022, 6, 21, 14, 10, 45),
+                    issues = listOf("FOO-1597", "FOO-1600")
+                ),
+                DayWithIssues(
+                    day = dateTime(2022, 6, 22, 15, 33, 25),
+                    issues = listOf("FOO-1598")
+                ),
+                DayWithIssues(
+                    day = dateTime(2022, 6, 23, 13, 25, 52),
+                    issues = listOf("FOO-1550", "FOO-1550")
+                )
             )
-        )
     }
 
     @Suppress("LongParameterList")
-    private fun dateTime(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int): OffsetDateTime =
-        LocalDateTime.of(year, month, day, hour, minute, second).atOffset(UTC)
+    private fun dateTime(
+        year: Int,
+        month: Int,
+        day: Int,
+        hour: Int,
+        minute: Int,
+        second: Int
+    ): OffsetDateTime = LocalDateTime.of(year, month, day, hour, minute, second).atOffset(UTC)
 }

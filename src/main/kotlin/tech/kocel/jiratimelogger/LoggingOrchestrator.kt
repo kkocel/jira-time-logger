@@ -16,19 +16,20 @@ class LoggingOrchestrator(
     fun logTimeOnIssues() {
         val daysWithIssues: List<DayWithIssues> = remainingCommitsReader.provideRemainingDaysWithIssues()
 
-        val hasErrors = daysWithIssues.map(issueTimePartitioner::howLongEachIssueTook)
-            .flatMap { dayWithLoggedIssues ->
-                dayWithLoggedIssues
-                    .filter {
-                        if (it.loggedTime > Duration.ZERO) {
-                            true
-                        } else {
-                            logger.info { "Not logging work ${it.day.toLocalDate()} - already logged" }
-                            false
+        val hasErrors =
+            daysWithIssues.map(issueTimePartitioner::howLongEachIssueTook)
+                .flatMap { dayWithLoggedIssues ->
+                    dayWithLoggedIssues
+                        .filter {
+                            if (it.loggedTime > Duration.ZERO) {
+                                true
+                            } else {
+                                logger.info { "Not logging work ${it.day.toLocalDate()} - already logged" }
+                                false
+                            }
                         }
-                    }
-                    .map { workLogger.logWork(it.day, it.issue, it.loggedTime) }
-            }.any { it.isLeft() }
+                        .map { workLogger.logWork(it.day, it.issue, it.loggedTime) }
+                }.any { it.isLeft() }
 
         if (!hasErrors) {
             if (daysWithIssues.isNotEmpty()) {

@@ -31,32 +31,37 @@ class JiraWorkLogger(
 
     private val jiraDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 
-    fun logWork(day: OffsetDateTime, issue: String, duration: Duration): Either<Throwable, String?> = Either.catch {
-        webclient
-            .post()
-            .uri("/rest/api/2/issue/{issue}/worklog", issue)
-            .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(
-                DateAndTimeSpent(
-                    timeSpentSeconds = duration.toSeconds(),
-                    started = day.format(jiraDateFormat)
-                )
-            ).retrieve()
-            .bodyToMono<String>()
-            .map {
-                logger.info { "Logged $duration for $day in $issue" }
-                it
-            }
-            .doOnError {
-                if (it is WebClientResponseException) {
-                    logger.warn { "Error for $day and $issue: " + it.responseBodyAsString }
-                } else {
-                    logger.warn { "Can't log worklog: $it" }
+    fun logWork(
+        day: OffsetDateTime,
+        issue: String,
+        duration: Duration
+    ): Either<Throwable, String?> =
+        Either.catch {
+            webclient
+                .post()
+                .uri("/rest/api/2/issue/{issue}/worklog", issue)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(
+                    DateAndTimeSpent(
+                        timeSpentSeconds = duration.toSeconds(),
+                        started = day.format(jiraDateFormat)
+                    )
+                ).retrieve()
+                .bodyToMono<String>()
+                .map {
+                    logger.info { "Logged $duration for $day in $issue" }
+                    it
                 }
-            }
-            .block()
-    }
+                .doOnError {
+                    if (it is WebClientResponseException) {
+                        logger.warn { "Error for $day and $issue: " + it.responseBodyAsString }
+                    } else {
+                        logger.warn { "Can't log worklog: $it" }
+                    }
+                }
+                .block()
+        }
 
     data class DateAndTimeSpent(val timeSpentSeconds: Long, val started: String)
 
