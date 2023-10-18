@@ -39,8 +39,9 @@ class JiraExistingTimeLogProvider(
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(
                 JqlSearch(
-                    jql = "worklogAuthor = currentUser() AND worklogDate = ${day.format(jiraDateFormat)} " +
-                        "ORDER BY updated ASC",
+                    jql =
+                        "worklogAuthor = currentUser() AND worklogDate = ${day.format(jiraDateFormat)} " +
+                            "ORDER BY updated ASC",
                     fields = listOf("worklog")
                 )
             ).retrieve()
@@ -90,5 +91,6 @@ class JiraExistingTimeLogProvider(
     data class IssueWorklogSearchResultFields(val worklog: WorklogField)
 
     data class WorklogField(val worklogs: List<WorklogItem>)
+
     data class WorklogItem(val timeSpentSeconds: Int, val started: OffsetDateTime)
 }
