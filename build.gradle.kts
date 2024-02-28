@@ -1,6 +1,6 @@
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.BIN
 
-val arrowVersion = "1.2.1"
+val arrowVersion = "1.2.2"
 val kotlinLoggingVersion = "3.0.5"
 val kotlinTestVersion = "5.8.0"
 val wireMockVersion = "3.0.1"
