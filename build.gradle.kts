@@ -10,7 +10,7 @@ val kotlinTestVersion = "5.9.1"
 val wireMockVersion = "3.10.0"
 
 plugins {
-    id("org.springframework.boot") version "3.4.1"
+    id("org.springframework.boot")
     id("io.spring.dependency-management") version "1.1.7"
     val kotlinVersion = "2.1.0"
     kotlin("jvm") version kotlinVersion
