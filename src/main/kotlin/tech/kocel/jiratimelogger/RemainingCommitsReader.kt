@@ -18,7 +18,8 @@ class RemainingCommitsReader(
 
         val reader = File(logfileName).bufferedReader()
 
-        return reader.lineSequence()
+        return reader
+            .lineSequence()
             .filter {
                 if (it.contains("[")) {
                     val date = it.dateFromLine().toLocalDate()
@@ -50,22 +51,28 @@ class RemainingCommitsReader(
         val issueRegex = Regex("([A-Z]{2,}-\\d+)")
 
         val duplicateDaysWithIssues: List<DayWithIssues> =
-            input.mapNotNull { nonNullInput ->
-                if (nonNullInput.contains('[')) {
-                    val date = nonNullInput.dateFromLine()
-                    val issues =
-                        issueRegex.findAll(nonNullInput.substringAfter("]"))
-                            .map { matchResult: MatchResult -> matchResult.groups.filterNotNull().first().value }
-                            .toList()
-                            .distinct()
-                    DayWithIssues(
-                        date,
-                        issues
-                    )
-                } else {
-                    null
-                }
-            }.filter { it.issues.isNotEmpty() }
+            input
+                .mapNotNull { nonNullInput ->
+                    if (nonNullInput.contains('[')) {
+                        val date = nonNullInput.dateFromLine()
+                        val issues =
+                            issueRegex
+                                .findAll(nonNullInput.substringAfter("]"))
+                                .map { matchResult: MatchResult ->
+                                    matchResult.groups
+                                        .filterNotNull()
+                                        .first()
+                                        .value
+                                }.toList()
+                                .distinct()
+                        DayWithIssues(
+                            date,
+                            issues
+                        )
+                    } else {
+                        null
+                    }
+                }.filter { it.issues.isNotEmpty() }
                 .toList()
 
         val issuesPerDay = duplicateDaysWithIssues.groupBy { it.day.dayOfMonth }

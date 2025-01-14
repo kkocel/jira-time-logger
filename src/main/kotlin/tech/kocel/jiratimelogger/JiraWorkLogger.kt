@@ -52,18 +52,19 @@ class JiraWorkLogger(
                 .map {
                     logger.info { "Logged $duration for $day in $issue" }
                     it
-                }
-                .doOnError {
+                }.doOnError {
                     if (it is WebClientResponseException) {
                         logger.warn { "Error for $day and $issue: " + it.responseBodyAsString }
                     } else {
                         logger.warn { "Can't log worklog: $it" }
                     }
-                }
-                .block()
+                }.block()
         }
 
-    data class DateAndTimeSpent(val timeSpentSeconds: Long, val started: String)
+    data class DateAndTimeSpent(
+        val timeSpentSeconds: Long,
+        val started: String
+    )
 
     companion object {
         const val PENDING_ACQUISITION_MAX_COUNT = 50
