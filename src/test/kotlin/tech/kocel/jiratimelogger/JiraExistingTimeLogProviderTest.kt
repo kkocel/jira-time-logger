@@ -22,9 +22,11 @@ class JiraExistingTimeLogProviderTest(
         val wireMockServer = WireMockServer(WireMockConfiguration.options().dynamicPort())
         wireMockServer.start()
         wireMockServer.stubFor(
-            WireMock.post(WireMock.urlPathEqualTo("/rest/api/2/search"))
+            WireMock
+                .post(WireMock.urlPathEqualTo("/rest/api/2/search"))
                 .willReturn(
-                    WireMock.aResponse()
+                    WireMock
+                        .aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody(
                             """
@@ -118,9 +120,11 @@ class JiraExistingTimeLogProviderTest(
         val wireMockServer = WireMockServer(WireMockConfiguration.options().dynamicPort())
         wireMockServer.start()
         wireMockServer.stubFor(
-            WireMock.post(WireMock.urlPathEqualTo("/rest/api/2/search"))
+            WireMock
+                .post(WireMock.urlPathEqualTo("/rest/api/2/search"))
                 .willReturn(
-                    WireMock.aResponse()
+                    WireMock
+                        .aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody(
                             """

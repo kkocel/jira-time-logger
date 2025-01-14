@@ -17,7 +17,8 @@ class LoggingOrchestrator(
         val daysWithIssues: List<DayWithIssues> = remainingCommitsReader.provideRemainingDaysWithIssues()
 
         val hasErrors =
-            daysWithIssues.map(issueTimePartitioner::howLongEachIssueTook)
+            daysWithIssues
+                .map(issueTimePartitioner::howLongEachIssueTook)
                 .flatMap { dayWithLoggedIssues ->
                     dayWithLoggedIssues
                         .filter {
@@ -27,8 +28,7 @@ class LoggingOrchestrator(
                                 logger.info { "Not logging work ${it.day.toLocalDate()} - already logged" }
                                 false
                             }
-                        }
-                        .map { workLogger.logWork(it.day, it.issue, it.loggedTime) }
+                        }.map { workLogger.logWork(it.day, it.issue, it.loggedTime) }
                 }.any { it.isLeft() }
 
         if (!hasErrors) {

@@ -37,13 +37,14 @@ class EqualIssueTimePartitionerTest {
     fun `should partition six issues with less time on each`() {
         // given
         val day =
-            LocalDateTime.of(
-                2022,
-                6,
-                23,
-                8,
-                0
-            ).atOffset(ZoneOffset.UTC)
+            LocalDateTime
+                .of(
+                    2022,
+                    6,
+                    23,
+                    8,
+                    0
+                ).atOffset(ZoneOffset.UTC)
 
         val partitioner =
             EqualIssueTimePartitioner(

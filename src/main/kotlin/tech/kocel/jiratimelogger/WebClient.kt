@@ -26,31 +26,37 @@ fun webClient(
     pendingAcquireTimeout: Long = DEFAULT_POOL_ACQUIRE_TIMEOUT,
     idleTimeoutSeconds: Long = AWS_TIMEOUT
 ): WebClient =
-    webClientBuilder.build().mutate().clientConnector(
-        ReactorClientHttpConnector(
-            HttpClient.create(
-                ConnectionProvider.builder(connectionProviderName)
-                    .maxIdleTime(Duration.ofSeconds(idleTimeoutSeconds))
-                    .maxConnections(ConnectionProvider.DEFAULT_POOL_MAX_CONNECTIONS)
-                    .pendingAcquireMaxCount(pendingMaxCount)
-                    .pendingAcquireTimeout(Duration.ofMillis(pendingAcquireTimeout))
-                    .build()
-            ).followRedirect(true).apply {
-                if (verboseLogging) {
-                    wiretap(
-                        "reactor.netty.http.client.HttpClient",
-                        LogLevel.DEBUG,
-                        AdvancedByteBufFormat.TEXTUAL
-                    )
-                }
-            }.responseTimeout(Duration.ofSeconds(connectTimeout))
-                .doOnConnected { connection ->
-                    connection.addHandlerLast(ReadTimeoutHandler(readTimeout.toInt()))
-                        .addHandlerLast(WriteTimeoutHandler(writeTimeout))
-                }
-        )
-    )
-        .defaultHeaders { h -> h.setBasicAuth(user, password) }
+    webClientBuilder
+        .build()
+        .mutate()
+        .clientConnector(
+            ReactorClientHttpConnector(
+                HttpClient
+                    .create(
+                        ConnectionProvider
+                            .builder(connectionProviderName)
+                            .maxIdleTime(Duration.ofSeconds(idleTimeoutSeconds))
+                            .maxConnections(ConnectionProvider.DEFAULT_POOL_MAX_CONNECTIONS)
+                            .pendingAcquireMaxCount(pendingMaxCount)
+                            .pendingAcquireTimeout(Duration.ofMillis(pendingAcquireTimeout))
+                            .build()
+                    ).followRedirect(true)
+                    .apply {
+                        if (verboseLogging) {
+                            wiretap(
+                                "reactor.netty.http.client.HttpClient",
+                                LogLevel.DEBUG,
+                                AdvancedByteBufFormat.TEXTUAL
+                            )
+                        }
+                    }.responseTimeout(Duration.ofSeconds(connectTimeout))
+                    .doOnConnected { connection ->
+                        connection
+                            .addHandlerLast(ReadTimeoutHandler(readTimeout.toInt()))
+                            .addHandlerLast(WriteTimeoutHandler(writeTimeout))
+                    }
+            )
+        ).defaultHeaders { h -> h.setBasicAuth(user, password) }
         .baseUrl(baseUrl)
         .build()
 

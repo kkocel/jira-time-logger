@@ -31,8 +31,8 @@ class JiraExistingTimeLogProvider(
             password = password
         )
 
-    override fun howManyHoursLoggedAlready(day: OffsetDateTime): Duration {
-        return webclient
+    override fun howManyHoursLoggedAlready(day: OffsetDateTime): Duration =
+        webclient
             .post()
             .uri("/rest/api/2/search")
             .accept(MediaType.APPLICATION_JSON)
@@ -48,30 +48,27 @@ class JiraExistingTimeLogProvider(
             .bodyToMono<SearchContainer>()
             .map { searchContainer ->
                 Duration.ofSeconds(
-                    searchContainer.issues.flatMap { result ->
-                        result
-                            .fields
-                            .worklog
-                            .worklogs
-                            .filter { it.started.toLocalDate() == day.toLocalDate() }
-                            .map { it.timeSpentSeconds }
-                    }
-                        .sum()
+                    searchContainer.issues
+                        .flatMap { result ->
+                            result
+                                .fields
+                                .worklog
+                                .worklogs
+                                .filter { it.started.toLocalDate() == day.toLocalDate() }
+                                .map { it.timeSpentSeconds }
+                        }.sum()
                         .toLong()
                 )
-            }
-            .doOnError {
+            }.doOnError {
                 if (it is WebClientResponseException) {
                     logger.warn { "Can't search for issues at $day body: " + it.responseBodyAsString }
                 } else {
                     logger.info { it }
                 }
-            }
-            .onErrorResume(
+            }.onErrorResume(
                 WebClientResponseException::class.java
             ) { Mono.just(Duration.ZERO) }
             .block() ?: Duration.ZERO
-    }
 
     companion object {
         const val PENDING_ACQUISITION_MAX_COUNT = 50
@@ -84,13 +81,26 @@ class JiraExistingTimeLogProvider(
         val issues: List<IssueWorklogSearchResult>
     )
 
-    data class JqlSearch(val jql: String, val fields: List<String>)
+    data class JqlSearch(
+        val jql: String,
+        val fields: List<String>
+    )
 
-    data class IssueWorklogSearchResult(val key: String, val fields: IssueWorklogSearchResultFields)
+    data class IssueWorklogSearchResult(
+        val key: String,
+        val fields: IssueWorklogSearchResultFields
+    )
 
-    data class IssueWorklogSearchResultFields(val worklog: WorklogField)
+    data class IssueWorklogSearchResultFields(
+        val worklog: WorklogField
+    )
 
-    data class WorklogField(val worklogs: List<WorklogItem>)
+    data class WorklogField(
+        val worklogs: List<WorklogItem>
+    )
 
-    data class WorklogItem(val timeSpentSeconds: Int, val started: OffsetDateTime)
+    data class WorklogItem(
+        val timeSpentSeconds: Int,
+        val started: OffsetDateTime
+    )
 }
