@@ -3,7 +3,9 @@ package tech.kocel.jiratimelogger
 import java.time.Duration
 import java.time.OffsetDateTime
 
-class EqualIssueTimePartitioner(private val existingTimeLogProvider: ExistingTimeLogProvider) {
+class EqualIssueTimePartitioner(
+    private val existingTimeLogProvider: ExistingTimeLogProvider
+) {
     fun howLongEachIssueTook(dayWithIssues: DayWithIssues): List<DayWithLoggedIssue> {
         val issues = dayWithIssues.issues.distinct()
         val issueDuration = howLongToLogToday(dayWithIssues.day).dividedBy(issues.size.toLong())
