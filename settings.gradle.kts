@@ -4,7 +4,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 
-    var sbVersion = "3.4.0"
+    var sbVersion = "3.4.1"
     sbVersion = providers.gradleProperty("sbVersion").getOrElse(sbVersion)
     plugins {
         id("org.springframework.boot") version sbVersion
