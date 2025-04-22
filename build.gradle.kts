@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val arrowVersion = "2.0.1"
+val arrowVersion = "2.1.0"
 val kotlinLoggingVersion = "3.0.5"
 val kotlinTestVersion = "5.9.1"
 val wireMockVersion = "3.12.1"
