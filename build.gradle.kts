@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val arrowVersion = "2.1.2"
 val kotlinLoggingVersion = "3.0.5"
 val kotlinTestVersion = "5.9.1"
-val wireMockVersion = "3.13.0"
+val wireMockVersion = "3.13.1"
 
 plugins {
     id("org.springframework.boot")
