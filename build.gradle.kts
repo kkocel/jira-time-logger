@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val arrowVersion = "2.2.0"
 val kotlinLoggingVersion = "3.0.5"
-val kotlinTestVersion = "6.0.5"
+val kotlinTestVersion = "6.0.7"
 val wireMockVersion = "3.13.2"
 
 plugins {
